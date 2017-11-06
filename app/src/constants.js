@@ -1,0 +1,5 @@
+export const SET_COLORS = 'SET_COLORS'
+export const SET_BUZZWORDS = 'SET_BUZZWORDS'
+export const SET_STARWARS = 'SET_STARWARS'
+export const SET_FORTUNES = 'SET_FORTUNES'
+export const SET_EMOJIS = 'SET_EMOJIS'
