@@ -1,6 +1,7 @@
 import React from 'react'
 import fetch from 'isomorphic-fetch'
 import { map } from 'ramda'
+import { connect } from 'react-redux'
 
 // load colors
 const li = color => {
@@ -11,25 +12,20 @@ const li = color => {
   )
 }
 
-class Colors extends React.Component {
-  state = {
-    colors: []
-  }
-
-  componentDidMount() {
-    fetch('http://localhost:5000/colors')
-      .then(res => res.json())
-      .then(colors => this.setState({ colors }))
-  }
-
-  render() {
-    return (
-      <div>
-        <h1>Colors</h1>
-        <ul>{map(li, this.state.colors)}</ul>
-      </div>
-    )
-  }
+const Colors = props => {
+  return (
+    <div>
+      <h1>Colors</h1>
+      <ul>{map(li, props.colors)}</ul>
+    </div>
+  )
 }
 
-export default Colors
+const mapStateToProps = state => {
+  return { colors: state.colors }
+}
+
+const connector = connect(mapStateToProps)
+
+// replace export statement
+export default connector(Colors)
