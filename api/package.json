@@ -1,0 +1,24 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "buzzwords": "^1.1.1",
+    "cors": "^2.8.4",
+    "css-color-names": "^0.0.4",
+    "emojis-list": "^2.1.0",
+    "express": "^4.16.2",
+    "fortune-cookie": "^0.0.1",
+    "ramda": "^0.25.0",
+    "starwars-names": "^1.6.0",
+    "uuid": "^3.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.12.1"
+  },
+  "scripts": {
+    "start": "nodemon server"
+  }
+}
