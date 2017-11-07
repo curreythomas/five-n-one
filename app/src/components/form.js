@@ -2,12 +2,9 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 const Form = ({ id, name, value, onChange, onSubmit, cancelUrl }) => {
-  return (
-    <form onSubmit={onSubmit({ id, name, value })}>
-      <div>
-        <label className="dib">id</label>
-        <div>{id}</div>
-      </div>
+  let nameField
+  if (cancelUrl === '/colors') {
+    nameField = (
       <div>
         <label className="dib">name</label>
         <input
@@ -16,6 +13,16 @@ const Form = ({ id, name, value, onChange, onSubmit, cancelUrl }) => {
           onChange={e => onChange('name', e.target.value)}
         />
       </div>
+    )
+  }
+
+  return (
+    <form onSubmit={onSubmit({ id, name, value })}>
+      <div>
+        <label className="dib">id</label>
+        <div>{id}</div>
+      </div>
+      {nameField}
       <div>
         <label className="dib">value</label>
         <input

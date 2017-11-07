@@ -1,5 +1,5 @@
-import { SET_COLORS } from '../constants'
-import { CHG_CURRENT_COLOR } from '../constants'
+import { SET_COLORS, CHG_CURRENT_COLOR } from '../constants'
+
 const { merge } = require('ramda')
 
 export const colors = (state = [], action) => {

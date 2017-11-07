@@ -1,6 +1,6 @@
 import fetch from 'isomorphic-fetch'
-import { SET_COLORS } from '../constants'
-import { CHG_CURRENT_COLOR } from '../constants'
+import { SET_COLORS, CHG_CURRENT_COLOR } from '../constants'
+
 const url = 'http://localhost:5000/colors'
 
 export const setColors = async (dispatch, getState) => {
@@ -9,7 +9,6 @@ export const setColors = async (dispatch, getState) => {
 }
 
 export const addColor = (color, history) => async (dispatch, getState) => {
-  console.log('color2', color)
   const headers = { 'Content-Type': 'application/json' }
   const method = 'POST'
   const body = JSON.stringify(color)
