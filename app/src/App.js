@@ -5,6 +5,7 @@ import Buzzwords from './pages/buzzwords'
 import Starwars from './pages/starwars'
 import FortuneCookie from './pages/fortune-cookies'
 import Emojis from './pages/emojis'
+import ColorForm from './pages/colors/form'
 
 const Menu = props => {
   return (
@@ -37,6 +38,7 @@ const App = props => {
       <div>
         <Switch>
           <Route exact path="/" component={Menu} />
+          <Route path="/colors/new" component={ColorForm} />
           <Route path="/colors" component={Colors} />
           <Route path="/buzzwords" component={Buzzwords} />
           <Route path="/starwars" component={Starwars} />
