@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import { getColor } from '../../action-creators/colors'
+import { getColor, removeColor } from '../../action-creators/colors'
 
 class ShowColor extends React.Component {
   componentDidMount() {
@@ -43,7 +43,11 @@ const mapStateToProps = state => {
 const mapActionsToProps = dispatch => {
   return {
     getColor: id => dispatch(getColor(id)),
-    removeColor: () => null
+    removeColor: (id, history) => {
+      if (window.confirm('Are you sure')) {
+        dispatch(removeColor(id, history))
+      }
+    }
   }
 }
 

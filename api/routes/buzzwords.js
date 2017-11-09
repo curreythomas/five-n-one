@@ -1,5 +1,16 @@
 const buzzwordObj = require('buzzwords')
-const { map, keys, prop, append, isNil, find, propEq } = require('ramda')
+const {
+  map,
+  keys,
+  prop,
+  append,
+  isNil,
+  find,
+  propEq,
+  equals,
+  compose,
+  reject
+} = require('ramda')
 const uuid = require('uuid')
 const bodyParser = require('body-parser')
 
@@ -31,6 +42,11 @@ module.exports = app => {
     }
     req.body.id = uuid.v4()
     buzzwords = append(req.body, buzzwords)
+    res.send({ ok: true })
+  })
+
+  app.delete('/buzzwords/:id', (req, res) => {
+    buzzwords = reject(compose(equals(req.params.id), prop('id')), buzzwords)
     res.send({ ok: true })
   })
 }

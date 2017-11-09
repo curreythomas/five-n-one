@@ -38,3 +38,16 @@ export const getFortune = id => async (dispatch, getState) => {
   const color = await fetch(url + '/' + id).then(res => res.json())
   dispatch({ type: SET_CURRENT_FORTUNE, payload: color })
 }
+
+export const removeFortune = (id, history) => async (dispatch, getState) => {
+  const results = await fetch(url + '/' + id, {
+    method: 'DELETE'
+  }).then(res => res.json())
+
+  if (results.ok) {
+    dispatch(setFortunes)
+    history.push('/fortune-cookies')
+  } else {
+    //handle error
+  }
+}

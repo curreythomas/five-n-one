@@ -1,5 +1,16 @@
 const fortunecookieObj = require('fortune-cookie')
-const { map, keys, prop, append, isNil, find, propEq } = require('ramda')
+const {
+  map,
+  keys,
+  prop,
+  append,
+  isNil,
+  find,
+  propEq,
+  reject,
+  compose,
+  equals
+} = require('ramda')
 const uuid = require('uuid')
 const bodyParser = require('body-parser')
 
@@ -31,6 +42,14 @@ module.exports = app => {
     }
     req.body.id = uuid.v4()
     fortuneCookies = append(req.body, fortuneCookies)
+    res.send({ ok: true })
+  })
+
+  app.delete('/fortune-cookies/:id', (req, res) => {
+    fortuneCookies = reject(
+      compose(equals(req.params.id), prop('id')),
+      fortuneCookies
+    )
     res.send({ ok: true })
   })
 }

@@ -36,3 +36,16 @@ export const getColor = id => async (dispatch, getState) => {
   const color = await fetch(url + '/' + id).then(res => res.json())
   dispatch({ type: SET_CURRENT_COLOR, payload: color })
 }
+
+export const removeColor = (id, history) => async (dispatch, getState) => {
+  const results = await fetch(url + '/' + id, {
+    method: 'DELETE'
+  }).then(res => res.json())
+
+  if (results.ok) {
+    dispatch(setColors)
+    history.push('/colors')
+  } else {
+    // handle error
+  }
+}

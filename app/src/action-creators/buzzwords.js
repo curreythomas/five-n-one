@@ -41,3 +41,16 @@ export const getBuzzword = id => async (dispatch, getState) => {
   const buzzword = await fetch(url + '/' + id).then(res => res.json())
   dispatch({ type: SET_CURRENT_BUZZWORD, payload: buzzword })
 }
+
+export const removeBuzzword = (id, history) => async (dispatch, getState) => {
+  const results = await fetch(url + '/' + id, {
+    method: 'DELETE'
+  }).then(res => res.json())
+
+  if (results.ok) {
+    dispatch(setBuzzwords)
+    history.push('/buzzwords')
+  } else {
+    //handle error
+  }
+}

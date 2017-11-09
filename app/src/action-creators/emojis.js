@@ -34,3 +34,16 @@ export const getEmoji = id => async (dispatch, getState) => {
   const emoji = await fetch(url + '/' + id).then(res => res.json())
   dispatch({ type: SET_CURRENT_EMOJI, payload: emoji })
 }
+
+export const removeEmoji = (id, history) => async (dispatch, getState) => {
+  const results = await fetch(url + '/' + id, {
+    method: 'DELETE'
+  }).then(res => res.json())
+
+  if (results.ok) {
+    dispatch(setEmojis)
+    history.push('/emojis')
+  } else {
+    //handle error
+  }
+}

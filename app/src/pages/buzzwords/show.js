@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import { getBuzzword } from '../../action-creators/buzzwords'
+import { getBuzzword, removeBuzzword } from '../../action-creators/buzzwords'
 
 class ShowBuzzword extends React.Component {
   componentDidMount() {
@@ -41,7 +41,11 @@ const mapStateToProps = state => {
 const mapActionsToProps = dispatch => {
   return {
     getBuzzword: id => dispatch(getBuzzword(id)),
-    removeBuzzword: () => null
+    removeBuzzword: (id, history) => {
+      if (window.confirm('Are you sure?')) {
+        dispatch(removeBuzzword(id, history))
+      }
+    }
   }
 }
 

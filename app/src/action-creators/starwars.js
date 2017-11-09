@@ -38,3 +38,16 @@ export const getStarwar = id => async (dispatch, getState) => {
   const starwar = await fetch(url + '/' + id).then(res => res.json())
   dispatch({ type: SET_CURRENT_STARWAR, payload: starwar })
 }
+
+export const removeStarwar = (id, history) => async (dispatch, getState) => {
+  const results = await fetch(url + '/' + id, {
+    method: 'DELETE'
+  }).then(res => res.json())
+
+  if (results.ok) {
+    dispatch(setStarwars)
+    history.push('/starwars')
+  } else {
+    //handle error
+  }
+}

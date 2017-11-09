@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import { getEmoji } from '../../action-creators/emojis'
+import { getEmoji, removeEmoji } from '../../action-creators/emojis'
 
 class ShowEmoji extends React.Component {
   componentDidMount() {
@@ -40,7 +40,11 @@ const mapStateToProps = state => {
 const mapActionsToProps = dispatch => {
   return {
     getEmoji: id => dispatch(getEmoji(id)),
-    removeEmoji: () => null
+    removeEmoji: (id, history) => {
+      if (window.confirm('Are you sure?')) {
+        dispatch(removeEmoji(id, history))
+      }
+    }
   }
 }
 

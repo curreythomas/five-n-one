@@ -2,7 +2,10 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import { getFortune } from '../../action-creators/fortune-cookies'
+import {
+  getFortune,
+  removeFortune
+} from '../../action-creators/fortune-cookies'
 
 class ShowFortune extends React.Component {
   componentDidMount() {
@@ -43,7 +46,11 @@ const mapStateToProps = state => {
 const mapActionsToProps = dispatch => {
   return {
     getFortune: id => dispatch(getFortune(id)),
-    removeFortune: () => null
+    removeFortune: (id, history) => {
+      if (window.confirm('Are you sure?')) {
+        dispatch(removeFortune(id, history))
+      }
+    }
   }
 }
 
