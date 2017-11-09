@@ -5,7 +5,11 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 // load starwars
 const li = starwar => {
-  return <li key={starwar.id}>{starwar.value}</li>
+  return (
+    <li key={starwar.id}>
+      <Link to={`/starwars/${starwar.id}`}>{starwar.value}</Link>
+    </li>
+  )
 }
 
 const Starwars = props => {

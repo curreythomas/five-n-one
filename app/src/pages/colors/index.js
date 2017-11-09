@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom'
 const li = color => {
   return (
     <li key={color.id} style={{ color: color.value }}>
-      {color.name}
+      <Link to={`/colors/${color.id}`}>{color.name}</Link>
     </li>
   )
 }

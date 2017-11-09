@@ -1,5 +1,5 @@
 import fetch from 'isomorphic-fetch'
-import { SET_EMOJIS, CHG_CURRENT_EMOJI } from '../constants'
+import { SET_EMOJIS, CHG_CURRENT_EMOJI, SET_CURRENT_EMOJI } from '../constants'
 
 const url = 'http://localhost:5000/emojis'
 
@@ -28,4 +28,9 @@ export const addEmoji = (emoji, history) => async (dispatch, getState) => {
 
 export const chgEmoji = (field, value) => (dispatch, getState) => {
   dispatch({ type: CHG_CURRENT_EMOJI, payload: { [field]: value } })
+}
+
+export const getEmoji = id => async (dispatch, getState) => {
+  const emoji = await fetch(url + '/' + id).then(res => res.json())
+  dispatch({ type: SET_CURRENT_EMOJI, payload: emoji })
 }

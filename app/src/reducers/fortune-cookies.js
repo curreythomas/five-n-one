@@ -1,4 +1,8 @@
-import { SET_FORTUNES, CHG_CURRENT_FORTUNE } from '../constants'
+import {
+  SET_FORTUNES,
+  CHG_CURRENT_FORTUNE,
+  SET_CURRENT_FORTUNE
+} from '../constants'
 
 const { merge } = require('ramda')
 export const fortuneCookies = (state = [], action) => {
@@ -14,8 +18,8 @@ export const currentFortune = (state = '', action) => {
   switch (action.type) {
     case CHG_CURRENT_FORTUNE:
       return merge(state, action.payload)
-    case SET_FORTUNES:
-      return ''
+    case SET_CURRENT_FORTUNE:
+      return action.payload
     default:
       return state
   }

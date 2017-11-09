@@ -6,7 +6,11 @@ import { Link } from 'react-router-dom'
 
 // load buzzwords
 const li = buzzword => {
-  return <li key={buzzword.id}>{buzzword.value}</li>
+  return (
+    <li key={buzzword.id}>
+      <Link to={`/buzzwords/${buzzword.id}`}>{buzzword.value}</Link>
+    </li>
+  )
 }
 
 const Buzzwords = props => {

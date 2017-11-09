@@ -5,7 +5,11 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 // load fortunes
 const li = fortune => {
-  return <li key={fortune.id}>{fortune.value}</li>
+  return (
+    <li key={fortune.id}>
+      <Link to={`/fortune-cookies/${fortune.id}`}>{fortune.value}</Link>
+    </li>
+  )
 }
 
 const FortuneCookie = props => {

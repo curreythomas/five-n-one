@@ -1,5 +1,9 @@
 import fetch from 'isomorphic-fetch'
-import { SET_STARWARS, CHG_CURRENT_STARWAR } from '../constants'
+import {
+  SET_STARWARS,
+  CHG_CURRENT_STARWAR,
+  SET_CURRENT_STARWAR
+} from '../constants'
 
 const url = 'http://localhost:5000/starwars'
 
@@ -28,4 +32,9 @@ export const addStarwar = (starwar, history) => async (dispatch, getState) => {
 
 export const chgStarwar = (field, value) => (dispatch, getState) => {
   dispatch({ type: CHG_CURRENT_STARWAR, payload: { [field]: value } })
+}
+
+export const getStarwar = id => async (dispatch, getState) => {
+  const starwar = await fetch(url + '/' + id).then(res => res.json())
+  dispatch({ type: SET_CURRENT_STARWAR, payload: starwar })
 }

@@ -1,5 +1,5 @@
 const starwarsObj = require('starwars-names')
-const { map, keys, prop, append, isNil } = require('ramda')
+const { map, keys, prop, append, isNil, find, propEq } = require('ramda')
 const uuid = require('uuid')
 const bodyParser = require('body-parser')
 
@@ -16,10 +16,9 @@ module.exports = app => {
   app.get('/starwars', (req, res) => {
     res.send(starwars)
   })
-}
-module.exports = app => {
-  app.get('/starwars', (req, res) => {
-    res.send(starwars)
+
+  app.get('/starwars/:id', (req, res) => {
+    res.send(find(propEq('id', req.params.id))(starwars))
   })
 
   app.post('/starwars/new', bodyParser.json(), (req, res) => {

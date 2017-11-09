@@ -10,6 +10,11 @@ import BuzzwordForm from './pages/buzzwords/form'
 import StarwarForm from './pages/starwars/form'
 import FortuneForm from './pages/fortune-cookies/form'
 import EmojiForm from './pages/emojis/form'
+import ShowColor from './pages/colors/show'
+import ShowBuzzword from './pages/buzzwords/show'
+import ShowStarwar from './pages/starwars/show'
+import ShowFortune from './pages/fortune-cookies/show'
+import ShowEmoji from './pages/emojis/show'
 const Menu = props => {
   return (
     <div>
@@ -42,14 +47,19 @@ const App = props => {
         <Switch>
           <Route exact path="/" component={Menu} />
           <Route path="/colors/new" component={ColorForm} />
+          <Route path="/colors/:id" component={ShowColor} />
           <Route path="/colors" component={Colors} />
           <Route path="/buzzwords/new" component={BuzzwordForm} />
+          <Route path="/buzzwords/:id" component={ShowBuzzword} />
           <Route path="/buzzwords" component={Buzzwords} />
           <Route path="/starwars/new" component={StarwarForm} />
+          <Route path="/starwars/:id" component={ShowStarwar} />
           <Route path="/starwars" component={Starwars} />
           <Route path="/fortune-cookies/new" component={FortuneForm} />
+          <Route path="/fortune-cookies/:id" component={ShowFortune} />
           <Route path="/fortune-cookies" component={FortuneCookie} />
           <Route path="/emojis/new" component={EmojiForm} />
+          <Route path="/emojis/:id" component={ShowEmoji} />
           <Route path="/emojis" component={Emojis} />
         </Switch>
       </div>

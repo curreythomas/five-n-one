@@ -1,5 +1,5 @@
 const emojisObj = require('emojis-list')
-const { map, keys, prop, append, isNil } = require('ramda')
+const { map, keys, prop, append, isNil, find, propEq } = require('ramda')
 const uuid = require('uuid')
 const bodyParser = require('body-parser')
 // create color document
@@ -16,6 +16,10 @@ module.exports = app => {
 
   app.get('/emojis', (req, res) => {
     res.send(emojis)
+  })
+
+  app.get('/emojis/:id', (req, res) => {
+    res.send(find(propEq('id', req.params.id))(emojis))
   })
 
   app.post('/emojis/new', (req, res) => {

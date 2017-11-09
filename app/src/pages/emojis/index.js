@@ -5,7 +5,11 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 // load emojis
 const li = emoji => {
-  return <li key={emoji.id}>{emoji.value}</li>
+  return (
+    <li key={emoji.id}>
+      <Link to={`/emojis/${emoji.id}`}>{emoji.value}</Link>
+    </li>
+  )
 }
 
 const Emojis = props => {

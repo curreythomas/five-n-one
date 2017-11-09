@@ -1,5 +1,9 @@
 import fetch from 'isomorphic-fetch'
-import { SET_FORTUNES, CHG_CURRENT_FORTUNE } from '../constants'
+import {
+  SET_FORTUNES,
+  CHG_CURRENT_FORTUNE,
+  SET_CURRENT_FORTUNE
+} from '../constants'
 
 const url = 'http://localhost:5000/fortune-cookies'
 
@@ -28,4 +32,9 @@ export const addFortune = (fortune, history) => async (dispatch, getState) => {
 
 export const chgFortune = (field, value) => (dispatch, getState) => {
   dispatch({ type: CHG_CURRENT_FORTUNE, payload: { [field]: value } })
+}
+
+export const getFortune = id => async (dispatch, getState) => {
+  const color = await fetch(url + '/' + id).then(res => res.json())
+  dispatch({ type: SET_CURRENT_FORTUNE, payload: color })
 }

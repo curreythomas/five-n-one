@@ -1,5 +1,5 @@
 const fortunecookieObj = require('fortune-cookie')
-const { map, keys, prop, append, isNil } = require('ramda')
+const { map, keys, prop, append, isNil, find, propEq } = require('ramda')
 const uuid = require('uuid')
 const bodyParser = require('body-parser')
 
@@ -14,6 +14,10 @@ let fortuneCookies = map(createFortune, keys(fortunecookieObj))
 module.exports = app => {
   app.get('/fortune-cookies', (req, res) => {
     res.send(fortuneCookies)
+  })
+
+  app.get('/fortune-cookies/:id', (req, res) => {
+    res.send(find(propEq('id', req.params.id))(fortuneCookies))
   })
 
   app.post('/fortune-cookies/new', bodyParser.json(), (req, res) => {

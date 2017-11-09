@@ -1,5 +1,5 @@
 import fetch from 'isomorphic-fetch'
-import { SET_COLORS, CHG_CURRENT_COLOR } from '../constants'
+import { SET_COLORS, CHG_CURRENT_COLOR, SET_CURRENT_COLOR } from '../constants'
 
 const url = 'http://localhost:5000/colors'
 
@@ -30,4 +30,9 @@ export const addColor = (color, history) => async (dispatch, getState) => {
 
 export const chgColor = (field, value) => (dispatch, getState) => {
   dispatch({ type: CHG_CURRENT_COLOR, payload: { [field]: value } })
+}
+
+export const getColor = id => async (dispatch, getState) => {
+  const color = await fetch(url + '/' + id).then(res => res.json())
+  dispatch({ type: SET_CURRENT_COLOR, payload: color })
 }

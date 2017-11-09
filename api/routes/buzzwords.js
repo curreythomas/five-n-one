@@ -1,5 +1,5 @@
 const buzzwordObj = require('buzzwords')
-const { map, keys, prop, append, isNil } = require('ramda')
+const { map, keys, prop, append, isNil, find, propEq } = require('ramda')
 const uuid = require('uuid')
 const bodyParser = require('body-parser')
 
@@ -14,6 +14,10 @@ let buzzwords = map(createBuzzword, keys(buzzwordObj))
 module.exports = app => {
   app.get('/buzzwords', (req, res) => {
     res.send(buzzwords)
+  })
+
+  app.get('/buzzwords/:id', (req, res) => {
+    res.send(find(propEq('id', req.params.id))(buzzwords))
   })
 
   app.post('/buzzwords/new', bodyParser.json(), (req, res) => {
