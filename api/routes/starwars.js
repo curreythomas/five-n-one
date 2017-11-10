@@ -24,6 +24,8 @@ const createStarWars = k => ({
 let starwars = map(createStarWars, keys(individualStarWars))
 
 module.exports = app => {
+  app.use(bodyParser.json())
+
   app.get('/starwars', (req, res) => {
     res.send(starwars)
   })
@@ -32,7 +34,7 @@ module.exports = app => {
     res.send(find(propEq('id', req.params.id))(starwars))
   })
 
-  app.post('/starwars/new', bodyParser.json(), (req, res) => {
+  app.post('/starwars', (req, res) => {
     if (isNil(req.body)) {
       res.status(500).send({
         ok: false,
@@ -42,12 +44,27 @@ module.exports = app => {
       return
     }
     req.body.id = uuid.v4()
+    console.log('body', req.body)
     starwars = append(req.body, starwars)
     res.send({ ok: true })
   })
 
   app.delete('/starwars/:id', (req, res) => {
     starwars = reject(compose(equals(req.params.id), prop('id')), starwars)
+    res.send({ ok: true })
+  })
+
+  app.put('/starwars/:id', (req, res) => {
+    if (!req.body) {
+      return res
+        .status(500)
+        .send({ ok: false, message: 'Color Object Required' })
+    }
+
+    starwars = map(
+      starwar => (propEq('id', req.params.id, starwar) ? req.body : starwar),
+      starwars
+    )
     res.send({ ok: true })
   })
 }

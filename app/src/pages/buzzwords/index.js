@@ -1,5 +1,5 @@
 import React from 'react'
-import fetch from 'isomorphic-fetch'
+// import fetch from 'isomorphic-fetch'
 import { map } from 'ramda'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'

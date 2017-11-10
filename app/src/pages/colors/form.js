@@ -10,7 +10,7 @@ const ColorForm = props => {
       <Form
         {...props.currentColor}
         onChange={props.onChange}
-        onSubmit={props.onSubmit(props.history)}
+        onSubmit={props.onSubmit(props.currentColor, props.history)}
         cancelUrl="/colors"
       />
     </div>
@@ -28,8 +28,7 @@ const mapActionsToProps = dispatch => {
     onChange: (field, value) => {
       dispatch(chgColor(field, value))
     },
-    onSubmit: history => color => e => {
-      e.preventDefault()
+    onSubmit: (color, history) => e => {
       dispatch(addColor(color, history))
     }
   }

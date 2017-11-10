@@ -13,7 +13,7 @@ export const addEmoji = (emoji, history) => async (dispatch, getState) => {
   const method = 'POST'
   const body = JSON.stringify(emoji)
 
-  const result = await fetch(url + '/new', {
+  const result = await fetch(url, {
     headers,
     method,
     body
@@ -45,5 +45,20 @@ export const removeEmoji = (id, history) => async (dispatch, getState) => {
     history.push('/emojis')
   } else {
     //handle error
+  }
+}
+
+export const updateEmoji = (emoji, history) => async (dispatch, getState) => {
+  const result = await fetch(url + '/' + emoji.id, {
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    method: 'PUT',
+    body: JSON.stringify(emoji)
+  }).then(res => res.json())
+
+  if (result.ok) {
+    dispatch(setEmojis)
+    history.push('/emojis/' + emoji.id)
   }
 }

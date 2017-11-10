@@ -1,9 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { split, contains } from 'ramda'
 
 const Form = ({ id, name, value, onChange, onSubmit, cancelUrl }) => {
   let nameField
-  if (cancelUrl === '/colors') {
+  const splitURL = split('/', cancelUrl)
+  if (contains('colors', splitURL)) {
     nameField = (
       <div>
         <label className="dib">name</label>
@@ -17,7 +19,12 @@ const Form = ({ id, name, value, onChange, onSubmit, cancelUrl }) => {
   }
 
   return (
-    <form onSubmit={onSubmit({ id, name, value })}>
+    <form
+      onSubmit={e => {
+        e.preventDefault()
+        onSubmit({ id, name, value })
+      }}
+    >
       <div>
         <label className="dib">id</label>
         <div>{id}</div>

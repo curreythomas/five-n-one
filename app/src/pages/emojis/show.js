@@ -12,8 +12,6 @@ class ShowEmoji extends React.Component {
 
   render() {
     const props = this.props
-    console.log('props.currentEmoji.id', props.currentEmoji.id)
-    console.log('props.match.params.id', props.match.params.id)
 
     if (props.currentEmoji.id !== props.match.params.id) {
       return <h1>Loading Emoji...</h1>

@@ -17,7 +17,7 @@ export const addStarwar = (starwar, history) => async (dispatch, getState) => {
   const method = 'POST'
   const body = JSON.stringify(starwar)
 
-  const result = await fetch(url + '/new', {
+  const result = await fetch(url, {
     headers,
     method,
     body
@@ -49,5 +49,23 @@ export const removeStarwar = (id, history) => async (dispatch, getState) => {
     history.push('/starwars')
   } else {
     //handle error
+  }
+}
+
+export const updateStarwar = (starwar, history) => async (
+  dispatch,
+  getState
+) => {
+  const result = await fetch(url + '/' + starwar.id, {
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    method: 'PUT',
+    body: JSON.stringify(starwar)
+  }).then(res => res.json())
+
+  if (result.ok) {
+    dispatch(setStarwars)
+    history.push('/starwars/' + starwar.id)
   }
 }

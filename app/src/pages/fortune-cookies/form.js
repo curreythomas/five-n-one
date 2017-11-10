@@ -10,7 +10,7 @@ const FortuneForm = props => {
       <Form
         cancelUrl="/fortune-cookies"
         onChange={props.onChange}
-        onSubmit={props.onSubmit(props.history)}
+        onSubmit={props.onSubmit(props.currentFortune, props.history)}
         {...props.currentFortune}
       />
     </div>
@@ -28,8 +28,7 @@ const mapActionsToProps = dispatch => {
     onChange: (field, value) => {
       dispatch(chgFortune(field, value))
     },
-    onSubmit: history => fortune => e => {
-      e.preventDefault()
+    onSubmit: (fortune, history) => e => {
       dispatch(addFortune(fortune, history))
     }
   }

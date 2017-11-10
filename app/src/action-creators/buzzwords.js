@@ -20,7 +20,7 @@ export const addBuzzword = (buzzword, history) => async (
   const method = 'POST'
   const body = JSON.stringify(buzzword)
 
-  const result = await fetch(url + '/new', {
+  const result = await fetch(url, {
     headers,
     method,
     body
@@ -52,5 +52,23 @@ export const removeBuzzword = (id, history) => async (dispatch, getState) => {
     history.push('/buzzwords')
   } else {
     //handle error
+  }
+}
+
+export const updateBuzzword = (buzzword, history) => async (
+  dispatch,
+  getState
+) => {
+  const result = await fetch(url + '/' + buzzword.id, {
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    method: 'PUT',
+    body: JSON.stringify(buzzword)
+  }).then(res => res.json())
+
+  if (result.ok) {
+    dispatch(setBuzzwords)
+    history.push('/buzzwords/' + buzzword.id)
   }
 }

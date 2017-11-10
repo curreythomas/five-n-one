@@ -13,7 +13,7 @@ export const addColor = (color, history) => async (dispatch, getState) => {
   const method = 'POST'
   const body = JSON.stringify(color)
 
-  const result = await fetch(url + '/new', {
+  const result = await fetch(url, {
     headers,
     method,
     body
@@ -47,5 +47,20 @@ export const removeColor = (id, history) => async (dispatch, getState) => {
     history.push('/colors')
   } else {
     // handle error
+  }
+}
+
+export const updateColor = (color, history) => async (dispatch, getState) => {
+  const result = await fetch(url + '/' + color.id, {
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    method: 'PUT',
+    body: JSON.stringify(color)
+  }).then(res => res.json())
+
+  if (result.ok) {
+    dispatch(setColors)
+    history.push('/colors/' + color.id)
   }
 }

@@ -10,7 +10,7 @@ const BuzzwordForm = props => {
       <Form
         cancelUrl="/buzzwords"
         onChange={props.onChange}
-        onSubmit={props.onSubmit(props.history)}
+        onSubmit={props.onSubmit(props.currentBuzzword, props.history)}
         {...props.currentBuzzword}
       />
     </div>
@@ -28,8 +28,7 @@ const mapActionsToProps = dispatch => {
     onChange: (field, value) => {
       dispatch(chgBuzzword(field, value))
     },
-    onSubmit: history => buzzword => e => {
-      e.preventDefault()
+    onSubmit: (buzzword, history) => e => {
       dispatch(addBuzzword(buzzword, history))
     }
   }

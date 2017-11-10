@@ -23,6 +23,8 @@ const createFortune = k => ({
 let fortuneCookies = map(createFortune, keys(fortunecookieObj))
 
 module.exports = app => {
+  app.use(bodyParser.json())
+
   app.get('/fortune-cookies', (req, res) => {
     res.send(fortuneCookies)
   })
@@ -31,7 +33,7 @@ module.exports = app => {
     res.send(find(propEq('id', req.params.id))(fortuneCookies))
   })
 
-  app.post('/fortune-cookies/new', bodyParser.json(), (req, res) => {
+  app.post('/fortune-cookies', (req, res) => {
     if (isNil(req.body)) {
       res.status(500).send({
         ok: false,
@@ -48,6 +50,20 @@ module.exports = app => {
   app.delete('/fortune-cookies/:id', (req, res) => {
     fortuneCookies = reject(
       compose(equals(req.params.id), prop('id')),
+      fortuneCookies
+    )
+    res.send({ ok: true })
+  })
+
+  app.put('/fortune-cookies/:id', (req, res) => {
+    if (!req.body) {
+      return res
+        .status(500)
+        .send({ ok: false, message: 'Fortune Object Required' })
+    }
+    fortuneCookies = map(
+      fortuneCookie =>
+        propEq('id', req.params.id, fortuneCookie) ? req.body : fortuneCookie,
       fortuneCookies
     )
     res.send({ ok: true })

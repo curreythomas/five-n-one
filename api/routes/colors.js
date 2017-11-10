@@ -9,7 +9,8 @@ const {
   propEq,
   reject,
   compose,
-  equals
+  equals,
+  findIndex
 } = require('ramda')
 const uuid = require('uuid')
 const bodyParser = require('body-parser')
@@ -34,8 +35,8 @@ module.exports = app => {
     res.send(find(propEq('id', req.params.id))(colors))
   })
 
-  app.post('/colors/new', (req, res) => {
-    if (isNil(req.body)) {
+  app.post('/colors', (req, res) => {
+    if (!req.body) {
       res.status(500).send({
         ok: false,
         message:
@@ -50,6 +51,20 @@ module.exports = app => {
 
   app.delete('/colors/:id', (req, res) => {
     colors = reject(compose(equals(req.params.id), prop('id')), colors)
+    res.send({ ok: true })
+  })
+
+  app.put('/colors/:id', (req, res) => {
+    if (!req.body) {
+      return res
+        .status(500)
+        .send({ ok: false, message: 'Color Object Required' })
+    }
+
+    colors = map(
+      color => (propEq('id', req.params.id, color) ? req.body : color),
+      colors
+    )
     res.send({ ok: true })
   })
 }

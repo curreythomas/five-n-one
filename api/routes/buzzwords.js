@@ -23,6 +23,8 @@ const createBuzzword = k => ({
 let buzzwords = map(createBuzzword, keys(buzzwordObj))
 
 module.exports = app => {
+  app.use(bodyParser.json())
+
   app.get('/buzzwords', (req, res) => {
     res.send(buzzwords)
   })
@@ -31,8 +33,8 @@ module.exports = app => {
     res.send(find(propEq('id', req.params.id))(buzzwords))
   })
 
-  app.post('/buzzwords/new', bodyParser.json(), (req, res) => {
-    if (isNil(req.body)) {
+  app.post('/buzzwords', (req, res) => {
+    if (!req.body) {
       res.status(500).send({
         ok: false,
         message:
@@ -41,12 +43,27 @@ module.exports = app => {
       return
     }
     req.body.id = uuid.v4()
+    console.log('body', req.body)
     buzzwords = append(req.body, buzzwords)
     res.send({ ok: true })
   })
 
   app.delete('/buzzwords/:id', (req, res) => {
     buzzwords = reject(compose(equals(req.params.id), prop('id')), buzzwords)
+    res.send({ ok: true })
+  })
+
+  app.put('/buzzwords/:id', (req, res) => {
+    if (!req.body) {
+      return res
+        .status(500)
+        .send({ ok: false, message: 'Color Object Required' })
+    }
+
+    buzzwords = map(
+      buzzword => (propEq('id', req.params.id, buzzword) ? req.body : buzzword),
+      buzzwords
+    )
     res.send({ ok: true })
   })
 }

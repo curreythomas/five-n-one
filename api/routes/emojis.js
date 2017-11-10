@@ -33,7 +33,7 @@ module.exports = app => {
     res.send(find(propEq('id', req.params.id))(emojis))
   })
 
-  app.post('/emojis/new', (req, res) => {
+  app.post('/emojis', (req, res) => {
     if (isNil(req.body)) {
       res.status(500).send({
         ok: false,
@@ -49,6 +49,20 @@ module.exports = app => {
 
   app.delete('/emojis/:id', (req, res) => {
     emojis = reject(compose(equals(req.params.id), prop('id')), emojis)
+    res.send({ ok: true })
+  })
+
+  app.put('/emojis/:id', (req, res) => {
+    if (!req.body) {
+      return res
+        .status(500)
+        .send({ ok: false, message: 'Color Object Required' })
+    }
+
+    emojis = map(
+      emoji => (propEq('id', req.params.id, emoji) ? req.body : emoji),
+      emojis
+    )
     res.send({ ok: true })
   })
 }

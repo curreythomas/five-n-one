@@ -17,7 +17,7 @@ export const addFortune = (fortune, history) => async (dispatch, getState) => {
   const method = 'POST'
   const body = JSON.stringify(fortune)
 
-  const result = await fetch(url + '/new', {
+  const result = await fetch(url, {
     headers,
     method,
     body
@@ -35,8 +35,8 @@ export const chgFortune = (field, value) => (dispatch, getState) => {
 }
 
 export const getFortune = id => async (dispatch, getState) => {
-  const color = await fetch(url + '/' + id).then(res => res.json())
-  dispatch({ type: SET_CURRENT_FORTUNE, payload: color })
+  const fortune = await fetch(url + '/' + id).then(res => res.json())
+  dispatch({ type: SET_CURRENT_FORTUNE, payload: fortune })
 }
 
 export const removeFortune = (id, history) => async (dispatch, getState) => {
@@ -49,5 +49,23 @@ export const removeFortune = (id, history) => async (dispatch, getState) => {
     history.push('/fortune-cookies')
   } else {
     //handle error
+  }
+}
+
+export const updateFortune = (fortune, history) => async (
+  dispatch,
+  getState
+) => {
+  const result = await fetch(url + '/' + fortune.id, {
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    method: 'PUT',
+    body: JSON.stringify(fortune)
+  }).then(res => res.json())
+
+  if (result.ok) {
+    dispatch(setFortunes)
+    history.push('/fortune-cookies/' + fortune.id)
   }
 }

@@ -10,7 +10,7 @@ const EmojiForm = props => {
       <Form
         {...props.currentEmoji}
         onChange={props.onChange}
-        onSubmit={props.onSubmit(props.history)}
+        onSubmit={props.onSubmit(props.currentEmoji, props.history)}
         cancelUrl="/Emojis"
       />
     </div>
@@ -28,8 +28,7 @@ const mapActionsToProps = dispatch => {
     onChange: (field, value) => {
       dispatch(chgEmoji(field, value))
     },
-    onSubmit: history => emoji => e => {
-      e.preventDefault()
+    onSubmit: (emoji, history) => e => {
       dispatch(addEmoji(emoji, history))
     }
   }

@@ -10,7 +10,7 @@ const StarwarForm = props => {
       <Form
         {...props.currentStarwar}
         onChange={props.onChange}
-        onSubmit={props.onSubmit(props.history)}
+        onSubmit={props.onSubmit(props.currentStarwar, props.history)}
         cancelUrl="/Starwars"
       />
     </div>
@@ -28,8 +28,7 @@ const mapActionsToProps = dispatch => {
     onChange: (field, value) => {
       dispatch(chgStarwar(field, value))
     },
-    onSubmit: history => starwar => e => {
-      e.preventDefault()
+    onSubmit: (starwar, history) => e => {
       dispatch(addStarwar(starwar, history))
     }
   }
