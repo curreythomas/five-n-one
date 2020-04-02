@@ -1,9 +1,10 @@
-import fetch from 'isomorphic-fetch'
 import {
   SET_BUZZWORDS,
   CHG_CURRENT_BUZZWORD,
   SET_CURRENT_BUZZWORD
 } from '../constants'
+require('es6-promise').polyfill();
+require('isomorphic-fetch');
 
 const url = 'http://localhost:5000/buzzwords'
 

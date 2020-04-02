@@ -1,5 +1,6 @@
-import fetch from 'isomorphic-fetch'
 import { SET_COLORS, CHG_CURRENT_COLOR, SET_CURRENT_COLOR } from '../constants'
+require('es6-promise').polyfill();
+require('isomorphic-fetch');
 
 const url = 'http://localhost:5000/colors'
 

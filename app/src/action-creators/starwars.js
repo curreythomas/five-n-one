@@ -1,9 +1,10 @@
-import fetch from 'isomorphic-fetch'
 import {
   SET_STARWARS,
   CHG_CURRENT_STARWAR,
   SET_CURRENT_STARWAR
 } from '../constants'
+require('es6-promise').polyfill();
+require('isomorphic-fetch');
 
 const url = 'http://localhost:5000/starwars'
 

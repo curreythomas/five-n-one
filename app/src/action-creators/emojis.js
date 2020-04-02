@@ -1,5 +1,6 @@
-import fetch from 'isomorphic-fetch'
 import { SET_EMOJIS, CHG_CURRENT_EMOJI, SET_CURRENT_EMOJI } from '../constants'
+require('es6-promise').polyfill();
+require('isomorphic-fetch');
 
 const url = 'http://localhost:5000/emojis'
 

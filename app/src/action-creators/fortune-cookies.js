@@ -1,9 +1,10 @@
-import fetch from 'isomorphic-fetch'
 import {
   SET_FORTUNES,
   CHG_CURRENT_FORTUNE,
   SET_CURRENT_FORTUNE
 } from '../constants'
+require('es6-promise').polyfill();
+require('isomorphic-fetch');
 
 const url = 'http://localhost:5000/fortune-cookies'
 

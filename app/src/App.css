@@ -1,26 +1,42 @@
 .App {
+  background-color: #404040;
+}
+
+.h5 {
+  height: 1rem;
+}
+
+.landingHeading {
   text-align: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
-
-.App-title {
   font-size: 1.5em;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-.App-intro {
-  font-size: large;
+.container {
+  margin: auto;
 }
+
+
+.colorsLink {
+
+}
+
+.buzzwordsLink {
+
+}
+
+.starwarsLink {
+
+}
+
+.fortuneLink {
+
+}
+
+.emojisLink {
+
+}
+
 
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
