@@ -9,7 +9,7 @@
     "cors": "^2.8.4",
     "css-color-names": "^0.0.4",
     "emojis-list": "^2.1.0",
-    "express": "^4.16.2",
+    "express": "^4.17.3",
     "fortune-cookie": "^0.0.1",
     "ramda": "^0.25.0",
     "starwars-names": "^1.6.0",
